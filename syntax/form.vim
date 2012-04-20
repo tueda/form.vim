@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     FORM
-" Last Change:  5 Apr 2012
+" Last Change:  20 Apr 2012
 " Filenames:    *.frm
 
 " For version 5.x: Clear all syntax items
@@ -26,7 +26,7 @@ syntax keyword formExecutable     contained argimplode
 syntax keyword formExecutable     contained argument
 syntax match   formDeclaration    "\(\(^\|;\)\s*\)\zs\<\(auto\|autodeclare\)\>" skipwhite nextgroup=formDeclaration
 syntax keyword formOutputControl  contained b bracket brackets
-syntax keyword formDeclaration    contained cf cfunction cfunctions
+syntax keyword formDeclaration    contained c cf cfunction cfunctions
 syntax keyword formExecutable     contained chainin
 syntax keyword formExecutable     contained chainout
 syntax keyword formExecutable     contained chisholm
@@ -69,7 +69,7 @@ syntax keyword formOutputControl  contained format
 syntax keyword formExecutable     contained frompolynomial
 syntax keyword formDeclaration    contained f function functions
 syntax keyword formDeclaration    contained funpowers
-syntax keyword formDefinition     contained gf gfactorized globalfactorized
+syntax keyword formDefinition     contained gf gfactorized globalfactor globalfactorized
 syntax keyword formDefinition     contained g global
 syntax keyword formExecutable     contained goto
 syntax keyword formSpecification  contained hide
@@ -88,7 +88,7 @@ syntax keyword formDeclaration    contained insidefirst
 syntax keyword formSpecification  contained intohide
 syntax match   formSpecification  contained "\<keep\s\+brackets\>"
 syntax keyword formLabel          contained label
-syntax keyword formDefinition     contained lf lfactorized localfactorized
+syntax keyword formDefinition     contained lf lfactorized localfactor localfactorized
 syntax keyword formDeclaration    contained load
 syntax keyword formDefinition     contained l local
 syntax keyword formExecutable     contained makeinteger
