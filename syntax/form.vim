@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     FORM
-" Last Change:  20 Apr 2012
+" Last Change:  10 Jan 2013
 " Filenames:    *.frm
 
 " For version 5.x: Clear all syntax items
@@ -47,6 +47,7 @@ syntax keyword formExecutable     contained disorder
 syntax keyword formRepeat         contained do
 syntax keyword formSpecification  contained drop
 syntax keyword formExecutable     contained dropcoefficient
+syntax keyword formExecutable     contained dropsymbols
 syntax keyword formConditional    contained else
 syntax keyword formConditional    contained elseif
 syntax keyword formExecutable     contained endargument
@@ -80,7 +81,7 @@ syntax match   formConditional    "\(\(^\|;\)\s*\)\zs\<if\>" skipwhite nextgroup
 syntax region  formIfCondition    contained start=+(+ end=+)+ contains=formIfCondition,formString,formNestedString,formNone,formNumber,formWildcard,formDollar skipwhite nextgroup=formExecutable
 syntax keyword formConditional    contained ifmatch
 syntax keyword formConditional    contained ifnomatch
-syntax keyword formDeclaration    contained i index indices
+syntax keyword formDeclaration    contained i index indices indexes
 syntax keyword formExecutable     contained inexpression
 syntax keyword formSpecification  contained inparallel
 syntax keyword formExecutable     contained inside
@@ -122,6 +123,7 @@ syntax keyword formSpecification  contained pophide
 syntax keyword formMixedStatement contained p
 syntax match   formMixedStatement contained "\<print\>\(\[\]\)\?"
 syntax keyword formMixedStatement contained printtable
+syntax keyword formDeclaration    contained processbucketsize
 syntax keyword formDeclaration    contained propercount
 syntax keyword formSpecification  contained pushhide
 syntax keyword formExecutable     contained ratio
@@ -275,7 +277,7 @@ syntax match   formComment        "\;\@<=\s*\*.*$" contains=formTodo
 syntax keyword formToDo           contained TODO FIXME XXX
 
 syntax match   formDirective      "^\s*\.\(sort\|end\|store\|global\|clear\)\>"
-syntax match   formPreProc        "^\s*\#[a-zA-z][a-zA-Z]*\>"
+syntax region  formPreProc        start="^\s*#[a-zA-Z][a-zA-Z]*\>" skip="\\$" end="$"
 syntax match   formPreProc        "^\s*\#[\+\-\:]"
 syntax match   formPreProc        "^\s*\#\ze\$" contains=formDollar
 
