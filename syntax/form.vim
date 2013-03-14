@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     FORM
-" Last Change:  10 Jan 2013
+" Last Change:  14 Mar 2013
 " Filenames:    *.frm
 
 " For version 5.x: Clear all syntax items
@@ -19,6 +19,7 @@ syntax case ignore
 
 syntax keyword formOutputControl  contained ab abracket antibracket abrackets antibrackets
 syntax keyword formExecutable     contained also
+syntax keyword formExecutable     contained antiputinside antiputin aputinside aputin
 syntax keyword formExecutable     contained antisymmetrize
 syntax keyword formTableBase      contained apply
 syntax keyword formExecutable     contained argexplode
@@ -126,6 +127,7 @@ syntax keyword formMixedStatement contained printtable
 syntax keyword formDeclaration    contained processbucketsize
 syntax keyword formDeclaration    contained propercount
 syntax keyword formSpecification  contained pushhide
+syntax keyword formExecutable     contained putinside putin
 syntax keyword formExecutable     contained ratio
 syntax keyword formExecutable     contained rcyclesymmetrize
 syntax keyword formExecutable     contained redefine
