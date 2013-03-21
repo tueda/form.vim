@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     FORM
-" Last Change:  14 Mar 2013
+" Last Change:  21 Mar 2013
 " Filenames:    *.frm
 
 " For version 5.x: Clear all syntax items
@@ -202,6 +202,7 @@ syntax keyword formFunction       gcd_
 syntax keyword formFunction       gi_
 syntax keyword formFunction       integer_
 syntax keyword formFunction       invfac_
+syntax keyword formFunction       inverse_
 syntax keyword formFunction       makerational_
 syntax keyword formFunction       match_
 syntax keyword formFunction       max_
@@ -259,6 +260,7 @@ syntax keyword formFunction       den_
 syntax keyword formFunction       xarg_
 syntax keyword formFunction       dimension_
 syntax keyword formFunction       factor_
+syntax keyword formFunction       sep_
 syntax keyword formFunction       iarg_
 syntax keyword formFunction       parg_
 
