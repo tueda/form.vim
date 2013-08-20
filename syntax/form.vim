@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     FORM
-" Last Change:  21 Mar 2013
+" Last Change:  20 Aug 2013
 " Filenames:    *.frm
 
 " For version 5.x: Clear all syntax items
@@ -275,6 +275,7 @@ syntax keyword formSet            symbol_
 syntax keyword formSet            fixed_
 syntax keyword formSet            index_
 syntax keyword formSet            number_
+syntax keyword formSet            dummyindices_
 
 syntax match   formComment        "^\*.*$" contains=formTodo
 syntax match   formComment        "\;\@<=\s*\*.*$" contains=formTodo
