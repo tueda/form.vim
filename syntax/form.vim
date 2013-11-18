@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     FORM
-" Last Change:  20 Aug 2013
+" Last Change:  18 Nov 2013
 " Filenames:    *.frm
 
 " For version 5.x: Clear all syntax items
@@ -34,6 +34,7 @@ syntax keyword formExecutable     contained chisholm
 syntax keyword formDeclaration    contained cleartable
 syntax keyword formSpecification  contained collect
 syntax keyword formDeclaration    contained commuting
+syntax keyword formDeclaration    contained commuteinset
 syntax keyword formDeclaration    contained compress
 syntax keyword formExecutable     contained contract
 syntax keyword formDeclaration    contained ctable
