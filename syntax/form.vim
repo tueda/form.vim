@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     FORM
-" Last Change:  9 Oct 2014
+" Last Change:  13 Oct 2014
 " Filenames:    *.frm
 
 " For version 5.x: Clear all syntax items
@@ -284,7 +284,7 @@ syntax keyword formToDo           contained TODO FIXME XXX
 
 syntax match   formDirective      "^\s*\.\(sort\|end\|store\|global\|clear\)\>"
 syntax region  formPreProc        start="^\s*#[a-zA-Z][a-zA-Z]*\>" skip="\\$" end="$"
-syntax region  formPreProc        start=+^\s*#\(re\)\?define\s*[^"]*"+ skip=+\\"+ end=+".*$+ contains=formString keepend
+syntax region  formPreProc        start=+^\s*#\(define\|redefine\|write\)\s*[^"]*"+ skip=+\\"+ end=+".*$+ contains=formString keepend
 syntax match   formPreProc        "^\s*\#[\+\-\:]"
 syntax match   formPreProc        "^\s*\#\ze\$" contains=formDollar
 
