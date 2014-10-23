@@ -1,6 +1,6 @@
 " Vim syntax file
 " Language:     FORM
-" Last Change:  13 Oct 2014
+" Last Change:  23 Oct 2014
 " Filenames:    *.frm
 
 " For version 5.x: Clear all syntax items
@@ -300,7 +300,10 @@ syntax match   formWildcard       "?!\?\([a-zA-Z][a-zA-Z0-9]*_\?\|\[[^]]\+\]\|{[
 syntax match   formDollar         "\$[a-zA-Z][a-zA-Z0-9]*"
 syntax match   formDollar         "\$\ze`"
 
-syntax sync ccomment formComment minlines=10
+if !exists("form_minlines")
+  let form_minlines = 20
+endif
+exec "syntax sync minlines=" . form_minlines
 
 if version >= 508 || !exists("did_form_syn_inits")
   if version < 508
