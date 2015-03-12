@@ -1,6 +1,5 @@
 " Vim syntax file
 " Language:     FORM
-" Last Change:  23 Oct 2014
 " Filenames:    *.frm
 
 " For version 5.x: Clear all syntax items
@@ -37,6 +36,8 @@ syntax keyword formDeclaration    contained commuting
 syntax keyword formDeclaration    contained commuteinset
 syntax keyword formDeclaration    contained compress
 syntax keyword formExecutable     contained contract
+syntax keyword formDefinition     contained copyspectator
+syntax keyword formDeclaration    contained createspectator
 syntax keyword formDeclaration    contained ctable
 syntax keyword formDeclaration    contained ct ctensor ctensors
 syntax keyword formExecutable     contained cyclesymmetrize
@@ -52,6 +53,7 @@ syntax keyword formExecutable     contained dropcoefficient
 syntax keyword formExecutable     contained dropsymbols
 syntax keyword formConditional    contained else
 syntax keyword formConditional    contained elseif
+syntax keyword formSpecification  contained emptyspectator
 syntax keyword formExecutable     contained endargument
 syntax keyword formRepeat         contained enddo
 syntax keyword formConditional    contained endif
@@ -132,6 +134,7 @@ syntax keyword formExecutable     contained putinside putin
 syntax keyword formExecutable     contained ratio
 syntax keyword formExecutable     contained rcyclesymmetrize
 syntax keyword formExecutable     contained redefine
+syntax keyword formSpecification  contained removespectator
 syntax keyword formExecutable     contained renumber
 syntax match   formRepeat         "\(\(^\|;\)\s*\)\zs\<repeat\>" skipwhite nextgroup=formExecutable
 syntax keyword formExecutable     contained replaceloop
@@ -157,6 +160,7 @@ syntax keyword formExecutable     contained term
 syntax keyword formTableBase      contained testuse
 syntax keyword formDeclaration    contained threadbucketsize
 syntax keyword formExecutable     contained topolynomial
+syntax keyword formExecutable     contained tospectator
 syntax keyword formExecutable     contained totensor
 syntax keyword formExecutable     contained tovector
 syntax keyword formExecutable     contained trace4
