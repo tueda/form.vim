@@ -17,7 +17,7 @@ syntax match formStatement "\(\(^\|;\)\s*\)\zs\<[a-zA-Z][a-zA-Z0-9]*\>*" contain
 syntax case ignore
 
 syntax keyword formOutputControl  contained ab abracket antibracket abrackets antibrackets
-syntax keyword formExecutable     contained also
+syntax keyword formExecutable     contained al also
 syntax keyword formExecutable     contained antiputinside antiputin aputinside aputin
 syntax keyword formExecutable     contained antisymmetrize
 syntax keyword formTableBase      contained apply
