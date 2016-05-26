@@ -288,7 +288,7 @@ syntax keyword formToDo           contained TODO FIXME XXX
 
 syntax match   formDirective      "^\s*\.\(sort\|end\|store\|global\|clear\)\>"
 syntax region  formPreProc        start="^\s*#[a-zA-Z][a-zA-Z]*\>" skip="\\$" end="$"
-syntax region  formPreProc        start=+^\s*#\(define\|redefine\|write\)\s*[^"]*"+ skip=+\\"+ end=+".*$+ contains=formString keepend
+syntax region  formPreProc        start=+^\s*#\(add\|define\|redefine\|write\)\s*[^"]*"+ skip=+\\"+ end=+".*$+ contains=formString keepend
 syntax match   formPreProc        "^\s*\#[\+\-\:]"
 syntax match   formPreProc        "^\s*\#\ze\$" contains=formDollar
 
