@@ -12,9 +12,96 @@ endif
 
 syntax case match
 
-syntax match formStatement "\(\(^\|;\)\s*\)\zs\<[a-zA-Z][a-zA-Z0-9]*\>*" contains=formDeclaration,formSpecification,formDefinition,formExecutable,formConditional,formRepeat,formLabel,formTableBase,formOutputControl,formModuleControl,formMixedStatement
+syntax match   formStatementBegin /\(^\|;\)\s*\zs\ze[a-zA-Z]/ nextgroup=formDeclaration,formSpecification,formDefinition,formExecutable,formConditional,formRepeat,formLabel,formTableBase,formOutputControl,formModuleControl,formMixedStatement
+
+syntax match   formPreProcBegin   /^\s*\zs\ze#[a-zA-Z]/ nextgroup=formPreProcFirst
+syntax match   formPreProcFirst   /#[a-zA-Z][a-zA-Z0-9]*/ contains=formPreProcHead,formPreProcCommand nextgroup=formPreProcBody
+syntax match   formPreProcHead    contained /#/
+syntax region  formPreProcBody    contained start=// skip=/\\$/ end=/$/ contains=formPreProcString
+syntax region  formPreProcString  contained start=/"/ skip=/\\"/ end=/"/
+
+syntax match   formPreProc        /^\s*\#[\+\-\:]/
+syntax match   formPreProc        /^\s*\#\s*\ze\$/ contains=formDollar
+
+syntax match   formComment        /^\*.*$/ contains=formTodo
+syntax match   formComment        /;\zs\s*\*.*$/ contains=formTodo
+syntax keyword formToDo           contained TODO FIXME XXX
+
+syntax match   formDirective      /^\s*\.\(sort\|end\|store\|global\|clear\)\>/
+
+syntax region  formString         start=/"/ skip=/\\"/ end=/"/
+syntax region  formNestedString   start=/`/ end=/'/ contains=formNestedString
+syntax match   formFormalName     /\[[^\]]\+\]/ contains=formNestedString
+syntax match   formNumber         /\<\d\+\>/
+syntax keyword formNumber         i_
+syntax keyword formNumber         pi_
+
+syntax match   formWildcard       /?/
+syntax match   formWildcard       /?!\?\([a-zA-Z][a-zA-Z0-9]*_\?\|\[[^]]\+\]\|{[^}]\+}\)\(\[[a-zA-Z][a-zA-Z0-9]*\]\)\?/
+syntax match   formDollar         /\$[a-zA-Z][a-zA-Z0-9]*/
+syntax match   formDollar         /\$\ze`/
 
 syntax case ignore
+
+syntax keyword formPreProcCommand contained add
+syntax keyword formPreProcCommand contained addseparator
+syntax keyword formPreProcCommand contained append
+"syntax keyword formPreProcCommand contained assign
+syntax keyword formPreProcCommand contained break
+syntax keyword formPreProcCommand contained breakdo
+syntax keyword formPreProcCommand contained call
+syntax keyword formPreProcCommand contained case
+syntax keyword formPreProcCommand contained clearoptimize
+syntax keyword formPreProcCommand contained close
+syntax keyword formPreProcCommand contained closedictionary
+syntax keyword formPreProcCommand contained commentchar
+syntax keyword formPreProcCommand contained create
+syntax keyword formPreProcCommand contained debug
+syntax keyword formPreProcCommand contained default
+syntax keyword formPreProcCommand contained define
+syntax keyword formPreProcCommand contained do
+syntax keyword formPreProcCommand contained else
+syntax keyword formPreProcCommand contained elseif
+syntax keyword formPreProcCommand contained enddo
+syntax keyword formPreProcCommand contained endif
+syntax keyword formPreProcCommand contained endinside
+syntax keyword formPreProcCommand contained endprocedure
+syntax keyword formPreProcCommand contained endswitch
+syntax keyword formPreProcCommand contained exchange
+syntax keyword formPreProcCommand contained external
+syntax keyword formPreProcCommand contained factdollar
+syntax keyword formPreProcCommand contained fromexternal
+syntax keyword formPreProcCommand contained if
+syntax keyword formPreProcCommand contained ifdef
+syntax keyword formPreProcCommand contained ifndef
+syntax keyword formPreProcCommand contained include
+syntax keyword formPreProcCommand contained message
+syntax keyword formPreProcCommand contained opendictionary
+syntax keyword formPreProcCommand contained optimize
+syntax keyword formPreProcCommand contained pipe
+syntax keyword formPreProcCommand contained preout
+syntax keyword formPreProcCommand contained printtimes
+syntax keyword formPreProcCommand contained procedure
+syntax keyword formPreProcCommand contained procedureextension
+syntax keyword formPreProcCommand contained prompt
+syntax keyword formPreProcCommand contained redefine
+syntax keyword formPreProcCommand contained remove
+syntax keyword formPreProcCommand contained reset
+syntax keyword formPreProcCommand contained reverseinclude
+syntax keyword formPreProcCommand contained rmexternal
+syntax keyword formPreProcCommand contained rmseparator
+syntax keyword formPreProcCommand contained setexternal
+syntax keyword formPreProcCommand contained setexternalattr
+syntax keyword formPreProcCommand contained setrandom
+syntax keyword formPreProcCommand contained show
+syntax keyword formPreProcCommand contained skipextrasymbols
+syntax keyword formPreProcCommand contained switch
+syntax keyword formPreProcCommand contained system
+syntax keyword formPreProcCommand contained terminate
+syntax keyword formPreProcCommand contained toexternal
+syntax keyword formPreProcCommand contained undefine
+syntax keyword formPreProcCommand contained usedictionary
+syntax keyword formPreProcCommand contained write
 
 syntax keyword formOutputControl  contained ab abracket antibracket abrackets antibrackets
 syntax keyword formExecutable     contained al also
@@ -24,7 +111,7 @@ syntax keyword formTableBase      contained apply
 syntax keyword formExecutable     contained argexplode
 syntax keyword formExecutable     contained argimplode
 syntax keyword formExecutable     contained argument
-syntax match   formDeclaration    "\(\(^\|;\)\s*\)\zs\<\(auto\|autodeclare\)\>" skipwhite nextgroup=formDeclaration
+syntax keyword formDeclaration    contained auto autodeclare skipwhite nextgroup=formDeclaration
 syntax keyword formOutputControl  contained b bracket brackets
 syntax keyword formDeclaration    contained c cf cfunction cfunctions
 syntax keyword formExecutable     contained chainin
@@ -81,8 +168,8 @@ syntax keyword formSpecification  contained hide
 syntax keyword formExecutable     contained id identify
 syntax keyword formExecutable     contained idnew
 syntax keyword formExecutable     contained idold
-syntax match   formConditional    "\(\(^\|;\)\s*\)\zs\<if\>" skipwhite nextgroup=formIfCondition
-syntax region  formIfCondition    contained start=+(+ end=+)+ contains=formIfCondition,formString,formNestedString,formNone,formNumber,formWildcard,formDollar skipwhite nextgroup=formExecutable
+syntax keyword formConditional    contained if skipwhite nextgroup=formIfCondition
+syntax region  formIfCondition    contained start=/(/ end=/)/ contains=formIfCondition,formIfFunction,formString,formNestedString,formFormalName,formNumber,formWildcard,formDollar skipwhite nextgroup=formExecutable
 syntax keyword formConditional    contained ifmatch
 syntax keyword formConditional    contained ifnomatch
 syntax keyword formDeclaration    contained i index indices indexes
@@ -136,7 +223,7 @@ syntax keyword formExecutable     contained rcyclesymmetrize
 syntax keyword formExecutable     contained redefine
 syntax keyword formSpecification  contained removespectator
 syntax keyword formExecutable     contained renumber
-syntax match   formRepeat         "\(\(^\|;\)\s*\)\zs\<repeat\>" skipwhite nextgroup=formExecutable
+syntax keyword formRepeat         contained repeat skipwhite nextgroup=formExecutable
 syntax keyword formExecutable     contained replaceloop
 syntax keyword formDeclaration    contained save
 syntax keyword formExecutable     contained select
@@ -205,6 +292,7 @@ syntax keyword formFunction       g7_
 syntax keyword formFunction       g_
 syntax keyword formFunction       gcd_
 syntax keyword formFunction       gi_
+syntax keyword formFunction       id_
 syntax keyword formFunction       integer_
 syntax keyword formFunction       invfac_
 syntax keyword formFunction       inverse_
@@ -222,6 +310,7 @@ syntax keyword formFunction       numfactors_
 syntax keyword formFunction       pattern_
 syntax keyword formFunction       poly_
 syntax keyword formFunction       prime_
+syntax keyword formFunction       putfirst_
 syntax keyword formFunction       random_
 syntax keyword formFunction       ranperm_
 syntax keyword formFunction       rem_
@@ -281,28 +370,15 @@ syntax keyword formSet            fixed_
 syntax keyword formSet            index_
 syntax keyword formSet            number_
 syntax keyword formSet            dummyindices_
+syntax keyword formSet            vector_
 
-syntax match   formComment        "^\*.*$" contains=formTodo
-syntax match   formComment        "\;\@<=\s*\*.*$" contains=formTodo
-syntax keyword formToDo           contained TODO FIXME XXX
-
-syntax match   formDirective      "^\s*\.\(sort\|end\|store\|global\|clear\)\>"
-syntax region  formPreProc        start="^\s*#[a-zA-Z][a-zA-Z]*\>" skip="\\$" end="$"
-syntax region  formPreProc        start=+^\s*#\(add\|define\|redefine\|write\)\s*[^"]*"+ skip=+\\"+ end=+".*$+ contains=formString keepend
-syntax match   formPreProc        "^\s*\#[\+\-\:]"
-syntax match   formPreProc        "^\s*\#\ze\$" contains=formDollar
-
-syntax region  formString         start=+"+ skip=+\\"+ end=+"+ contains=formSpecial
-syntax region  formNestedString   start=+`+ end=+'+ contains=formNestedString
-syntax match   formNone           "\[[^\]]\+\]" contains=formNestedString
-syntax match   formNumber         "\<\d\+\>"
-syntax keyword formNumber         i_
-syntax keyword formNumber         pi_
-
-syntax match   formWildcard       "?"
-syntax match   formWildcard       "?!\?\([a-zA-Z][a-zA-Z0-9]*_\?\|\[[^]]\+\]\|{[^}]\+}\)\(\[[a-zA-Z][a-zA-Z0-9]*\]\)\?"
-syntax match   formDollar         "\$[a-zA-Z][a-zA-Z0-9]*"
-syntax match   formDollar         "\$\ze`"
+syntax keyword formIfFunction     contained count
+syntax keyword formIfFunction     contained match
+syntax keyword formIfFunction     contained expression
+syntax keyword formIfFunction     contained occurs
+syntax keyword formIfFunction     contained findloop
+syntax keyword formIfFunction     contained multipleof
+syntax keyword formIfFunction     contained coefficient
 
 if !exists("form_minlines")
   let form_minlines = 20
@@ -330,11 +406,16 @@ if version >= 508 || !exists("did_form_syn_inits")
   HiLink formMixedStatement     Statement
 
   HiLink formFunction           Function
+  HiLink formIfFunction         Function
   HiLink formSet                Number
 
   HiLink formComment            Comment
   HiLink formTodo               Todo
   HiLink formPreProc            PreProc
+  HiLink formPreProcHead        PreProc
+  HiLink formPreProcCommand     PreProc
+  HiLink formPreProcBody        PreProc
+  HiLink formPreProcString      PreProc
   HiLink formDirective          Delimiter
   HiLink formString             String
   HiLink formNestedString       String
