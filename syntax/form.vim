@@ -12,16 +12,21 @@ endif
 
 syntax case match
 
-syntax match   formStatementBegin /\(^\|;\)\s*\zs\ze[a-zA-Z]/ nextgroup=formDeclaration,formSpecification,formDefinition,formExecutable,formConditional,formRepeat,formLabel,formTableBase,formOutputControl,formModuleControl,formMixedStatement
+syntax match   formStatementBegin /\(^\|;\)\s*\zs\ze[a-zA-Z_]/ nextgroup=formDeclaration,formSpecification,formDefinition,formExecutable,formConditional,formRepeat,formLabel,formTableBase,formOutputControl,formModuleControl,formMixedStatement
 
-syntax match   formPreProcBegin   /^\s*\zs\ze#[a-zA-Z]/ nextgroup=formPreProcFirst
-syntax match   formPreProcFirst   /#[a-zA-Z][a-zA-Z0-9]*/ contains=formPreProcHead,formPreProcCommand nextgroup=formPreProcBody
+syntax match   formPreProcBegin   /^\s*\zs\ze#[a-zA-Z_]/ nextgroup=formPreProcFirst
+syntax match   formPreProcFirst   /#[a-zA-Z_][a-zA-Z0-9_]*/ contains=formPreProcHead,formPreProcCommand nextgroup=formPreProcBody
 syntax match   formPreProcHead    contained /#/
 syntax region  formPreProcBody    contained start=// skip=/\\$/ end=/$/ contains=formPreProcString
 syntax region  formPreProcString  contained start=/"/ skip=/\\"/ end=/"/
 
-syntax match   formPreProc        /^\s*\#[\+\-\:]/
-syntax match   formPreProc        /^\s*\#\s*\ze\$/ contains=formDollar
+syntax match   formSetupBegin     /^\s*\#:/ nextgroup=formSetupFirst
+syntax match   formSetupFirst     /#:\s*[a-zA-Z_][a-zA-Z0-9_]*/ contains=formSetupHead,formSetupKeyword nextgroup=formSetupBody
+syntax match   formSetupHead      contained /#:/
+syntax region  formSetupBody      contained start=// end=/$/
+
+syntax match   formPreProc        /^\s*\#[\+\-]/
+syntax match   formPreProc        /^\s*\#\s*\ze\$/
 
 syntax match   formComment        /^\*.*$/ contains=formTodo
 syntax match   formComment        /;\zs\s*\*.*$/ contains=formTodo
@@ -75,6 +80,7 @@ syntax keyword formPreProcCommand contained if
 syntax keyword formPreProcCommand contained ifdef
 syntax keyword formPreProcCommand contained ifndef
 syntax keyword formPreProcCommand contained include
+syntax keyword formPreProcCommand contained inside
 syntax keyword formPreProcCommand contained message
 syntax keyword formPreProcCommand contained opendictionary
 syntax keyword formPreProcCommand contained optimize
@@ -102,6 +108,67 @@ syntax keyword formPreProcCommand contained toexternal
 syntax keyword formPreProcCommand contained undefine
 syntax keyword formPreProcCommand contained usedictionary
 syntax keyword formPreProcCommand contained write
+
+syntax keyword formSetupKeyword   contained bracketindexsize
+syntax keyword formSetupKeyword   contained commentchar
+syntax keyword formSetupKeyword   contained compresssize
+syntax keyword formSetupKeyword   contained constindex
+syntax keyword formSetupKeyword   contained continuationlines
+syntax keyword formSetupKeyword   contained define
+syntax keyword formSetupKeyword   contained dotchar
+syntax keyword formSetupKeyword   contained factorizationcache
+syntax keyword formSetupKeyword   contained filepatches
+syntax keyword formSetupKeyword   contained functionlevels
+syntax keyword formSetupKeyword   contained hidesize
+syntax keyword formSetupKeyword   contained incdir
+syntax keyword formSetupKeyword   contained indentspace
+syntax keyword formSetupKeyword   contained insidefirst
+syntax keyword formSetupKeyword   contained largepatches
+syntax keyword formSetupKeyword   contained largesize
+syntax keyword formSetupKeyword   contained maxnumbersize
+syntax keyword formSetupKeyword   contained maxtermsize
+syntax keyword formSetupKeyword   contained maxwildcards
+syntax keyword formSetupKeyword   contained nospacesinnumbers
+syntax keyword formSetupKeyword   contained numstorecaches
+syntax keyword formSetupKeyword   contained nwritefinalstatistics
+syntax keyword formSetupKeyword   contained nwriteprocessstatistics
+syntax keyword formSetupKeyword   contained nwritestatistics
+syntax keyword formSetupKeyword   contained nwritethreadstatistics
+syntax keyword formSetupKeyword   contained oldfactarg
+syntax keyword formSetupKeyword   contained oldgcd
+syntax keyword formSetupKeyword   contained oldorder
+syntax keyword formSetupKeyword   contained oldparallelstatistics
+syntax keyword formSetupKeyword   contained parentheses
+syntax keyword formSetupKeyword   contained path
+syntax keyword formSetupKeyword   contained procedureextension
+syntax keyword formSetupKeyword   contained processbucketsize
+syntax keyword formSetupKeyword   contained resettimeonclear
+syntax keyword formSetupKeyword   contained scratchsize
+syntax keyword formSetupKeyword   contained shmwinsize
+syntax keyword formSetupKeyword   contained sizestorecache
+syntax keyword formSetupKeyword   contained smallextension
+syntax keyword formSetupKeyword   contained smallsize
+syntax keyword formSetupKeyword   contained sortiosize
+syntax keyword formSetupKeyword   contained sorttype
+syntax keyword formSetupKeyword   contained spectatorsize
+syntax keyword formSetupKeyword   contained subfilepatches
+syntax keyword formSetupKeyword   contained sublargepatches
+syntax keyword formSetupKeyword   contained sublargesize
+syntax keyword formSetupKeyword   contained subsmallextension
+syntax keyword formSetupKeyword   contained subsmallsize
+syntax keyword formSetupKeyword   contained subsortiosize
+syntax keyword formSetupKeyword   contained subtermsinsmall
+syntax keyword formSetupKeyword   contained tempdir
+syntax keyword formSetupKeyword   contained tempsortdir
+syntax keyword formSetupKeyword   contained termsinsmall
+syntax keyword formSetupKeyword   contained threadbucketsize
+syntax keyword formSetupKeyword   contained threadloadbalancing
+syntax keyword formSetupKeyword   contained threads
+syntax keyword formSetupKeyword   contained threadscratchoutsize
+syntax keyword formSetupKeyword   contained threadscratchsize
+syntax keyword formSetupKeyword   contained threadsortfilesynch
+syntax keyword formSetupKeyword   contained totalsize
+syntax keyword formSetupKeyword   contained workspace
 
 syntax keyword formOutputControl  contained ab abracket antibracket abrackets antibrackets
 syntax keyword formExecutable     contained al also
@@ -139,14 +206,14 @@ syntax keyword formSpecification  contained drop
 syntax keyword formExecutable     contained dropcoefficient
 syntax keyword formExecutable     contained dropsymbols
 syntax keyword formConditional    contained else
-syntax keyword formConditional    contained elseif
+syntax keyword formConditional    contained elseif skipwhite nextgroup=formIfCondition
 syntax keyword formSpecification  contained emptyspectator
 syntax keyword formExecutable     contained endargument
 syntax keyword formRepeat         contained enddo
 syntax keyword formConditional    contained endif
 syntax keyword formExecutable     contained endinexpression
 syntax keyword formExecutable     contained endinside
-syntax keyword formConditional    contained endrepeat
+syntax keyword formRepeat         contained endrepeat
 syntax keyword formExecutable     contained endterm
 syntax keyword formRepeat         contained endwhile
 syntax keyword formExecutable     contained exit
@@ -170,8 +237,8 @@ syntax keyword formExecutable     contained idnew
 syntax keyword formExecutable     contained idold
 syntax keyword formConditional    contained if skipwhite nextgroup=formIfCondition
 syntax region  formIfCondition    contained start=/(/ end=/)/ contains=formIfCondition,formIfFunction,formString,formNestedString,formFormalName,formNumber,formWildcard,formDollar skipwhite nextgroup=formExecutable
-syntax keyword formConditional    contained ifmatch
-syntax keyword formConditional    contained ifnomatch
+syntax keyword formExecutable     contained ifmatch
+syntax keyword formExecutable     contained ifnomatch
 syntax keyword formDeclaration    contained i index indices indexes
 syntax keyword formExecutable     contained inexpression
 syntax keyword formSpecification  contained inparallel
@@ -258,7 +325,7 @@ syntax keyword formOutputControl  contained unfactorize
 syntax keyword formSpecification  contained unhide
 syntax keyword formDeclaration    contained unittrace
 syntax keyword formDeclaration    contained v vector vectors
-syntax keyword formRepeat         contained while
+syntax keyword formRepeat         contained while skipwhite nextgroup=formIfCondition
 syntax keyword formDeclaration    contained write
 
 syntax keyword formFunction       abs_
@@ -416,6 +483,9 @@ if version >= 508 || !exists("did_form_syn_inits")
   HiLink formPreProcCommand     PreProc
   HiLink formPreProcBody        PreProc
   HiLink formPreProcString      PreProc
+  HiLink formSetupHead          PreProc
+  HiLink formSetupKeyword       PreProc
+  HiLink formSetupBody          PreProc
   HiLink formDirective          Delimiter
   HiLink formString             String
   HiLink formNestedString       String
