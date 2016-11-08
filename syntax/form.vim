@@ -177,6 +177,7 @@ syntax keyword formExecutable     contained antisymmetrize
 syntax keyword formTableBase      contained apply
 syntax keyword formExecutable     contained argexplode
 syntax keyword formExecutable     contained argimplode
+syntax keyword formExecutable     contained argtoextrasymbol
 syntax keyword formExecutable     contained argument
 syntax keyword formDeclaration    contained auto autodeclare skipwhite nextgroup=formDeclaration
 syntax keyword formOutputControl  contained b bracket brackets
