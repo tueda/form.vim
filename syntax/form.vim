@@ -171,7 +171,7 @@ syntax keyword formSetupKeyword   contained totalsize
 syntax keyword formSetupKeyword   contained workspace
 syntax keyword formSetupKeyword   contained wtimestats
 
-syntax keyword formOutputControl  contained ab abracket antibracket abrackets antibrackets
+syntax keyword formOutputControl  contained abracket antibracket abrackets antibrackets
 syntax keyword formExecutable     contained al also
 syntax keyword formExecutable     contained antiputinside antiputin aputinside aputin
 syntax keyword formExecutable     contained antisymmetrize
@@ -181,8 +181,8 @@ syntax keyword formExecutable     contained argimplode
 syntax keyword formExecutable     contained argtoextrasymbol
 syntax keyword formExecutable     contained argument
 syntax keyword formDeclaration    contained auto autodeclare skipwhite nextgroup=formDeclaration
-syntax keyword formOutputControl  contained b bracket brackets
-syntax keyword formDeclaration    contained c cf cfunction cfunctions
+syntax keyword formOutputControl  contained bracket brackets
+syntax keyword formDeclaration    contained cfunction cfunctions
 syntax keyword formExecutable     contained chainin
 syntax keyword formExecutable     contained chainout
 syntax keyword formExecutable     contained chisholm
@@ -195,7 +195,7 @@ syntax keyword formExecutable     contained contract
 syntax keyword formDefinition     contained copyspectator
 syntax keyword formDeclaration    contained createspectator
 syntax keyword formDeclaration    contained ctable
-syntax keyword formDeclaration    contained ct ctensor ctensors
+syntax keyword formDeclaration    contained ctensor ctensors
 syntax keyword formExecutable     contained cyclesymmetrize
 syntax keyword formDeclaration    contained deallocatetable
 syntax keyword formSpecification  contained delete
@@ -228,10 +228,10 @@ syntax keyword formDeclaration    contained fillexpression
 syntax keyword formDeclaration    contained fillindex
 syntax keyword formOutputControl  contained format
 syntax keyword formExecutable     contained frompolynomial
-syntax keyword formDeclaration    contained f function functions
+syntax keyword formDeclaration    contained function functions
 syntax keyword formDeclaration    contained funpowers
-syntax keyword formDefinition     contained gf gfactorized globalfactor globalfactorized
-syntax keyword formDefinition     contained g global
+syntax keyword formDefinition     contained gfactorized globalfactor globalfactorized
+syntax keyword formDefinition     contained global
 syntax keyword formExecutable     contained goto
 syntax keyword formSpecification  contained hide
 syntax keyword formExecutable     contained id identify
@@ -241,7 +241,7 @@ syntax keyword formConditional    contained if skipwhite nextgroup=formIfConditi
 syntax region  formIfCondition    contained start=/(/ end=/)/ contains=formIfCondition,formIfFunction,formString,formNestedString,formFormalName,formNumber,formWildcard,formDollar skipwhite nextgroup=formExecutable
 syntax keyword formExecutable     contained ifmatch
 syntax keyword formExecutable     contained ifnomatch
-syntax keyword formDeclaration    contained i index indices indexes
+syntax keyword formDeclaration    contained index indices indexes
 syntax keyword formExecutable     contained inexpression
 syntax keyword formSpecification  contained inparallel
 syntax keyword formExecutable     contained inside
@@ -249,9 +249,9 @@ syntax keyword formDeclaration    contained insidefirst
 syntax keyword formSpecification  contained intohide
 syntax match   formSpecification  contained "\<keep\s\+brackets\>"
 syntax keyword formLabel          contained label
-syntax keyword formDefinition     contained lf lfactorized localfactor localfactorized
+syntax keyword formDefinition     contained lfactorized localfactor localfactorized
 syntax keyword formDeclaration    contained load
-syntax keyword formDefinition     contained l local
+syntax keyword formDefinition     contained local
 syntax keyword formExecutable     contained makeinteger
 syntax keyword formExecutable     contained many
 syntax keyword formExecutable     contained merge
@@ -262,14 +262,14 @@ syntax keyword formExecutable     contained multi
 syntax keyword formExecutable     contained multiply
 syntax keyword formSpecification  contained ndrop
 syntax keyword formOutputControl  contained nfactorize
-syntax keyword formDeclaration    contained nf nfunction nfunctions
+syntax keyword formDeclaration    contained nfunction nfunctions
 syntax keyword formSpecification  contained nhide
 syntax keyword formExecutable     contained normalize
 syntax keyword formSpecification  contained notinparallel
 syntax keyword formOutputControl  contained nprint
 syntax keyword formSpecification  contained nskip
 syntax keyword formDeclaration    contained ntable
-syntax keyword formDeclaration    contained nt ntensor ntensors
+syntax keyword formDeclaration    contained ntensor ntensors
 syntax keyword formOutputControl  contained nunfactorize
 syntax keyword formSpecification  contained nunhide
 syntax keyword formDeclaration    contained nwrite
@@ -280,7 +280,6 @@ syntax keyword formExecutable     contained only
 syntax keyword formDeclaration    contained polyfun
 syntax keyword formDeclaration    contained polyratfun
 syntax keyword formSpecification  contained pophide
-syntax keyword formMixedStatement contained p
 syntax match   formMixedStatement contained "\<print\>\(\[\]\)\?"
 syntax keyword formMixedStatement contained printtable
 syntax keyword formDeclaration    contained processbucketsize
@@ -307,11 +306,11 @@ syntax keyword formExecutable     contained splitfirstarg
 syntax keyword formExecutable     contained splitlastarg
 syntax keyword formExecutable     contained stuffle
 syntax keyword formExecutable     contained sum
-syntax keyword formDeclaration    contained s symbol symbols
+syntax keyword formDeclaration    contained symbol symbols
 syntax keyword formExecutable     contained symmetrize
 syntax keyword formDeclaration    contained table
 syntax keyword formTableBase      contained tablebase
-syntax keyword formDeclaration    contained t tensor tensors
+syntax keyword formDeclaration    contained tensor tensors
 syntax keyword formExecutable     contained term
 syntax keyword formTableBase      contained testuse
 syntax keyword formDeclaration    contained threadbucketsize
@@ -326,9 +325,31 @@ syntax keyword formExecutable     contained tryreplace
 syntax keyword formOutputControl  contained unfactorize
 syntax keyword formSpecification  contained unhide
 syntax keyword formDeclaration    contained unittrace
-syntax keyword formDeclaration    contained v vector vectors
+syntax keyword formDeclaration    contained vector vectors
 syntax keyword formRepeat         contained while skipwhite nextgroup=formIfCondition
 syntax keyword formDeclaration    contained write
+
+" Common abbreviations
+syntax case match
+
+syntax keyword formOutputControl  contained AB
+syntax keyword formOutputControl  contained B
+syntax keyword formDeclaration    contained CF
+syntax keyword formDeclaration    contained CT
+syntax keyword formDeclaration    contained F
+syntax keyword formDefinition     contained G
+syntax keyword formDefinition     contained GF
+syntax keyword formDeclaration    contained I
+syntax keyword formDefinition     contained LF
+syntax keyword formDefinition     contained L
+syntax keyword formDeclaration    contained NF
+syntax keyword formDeclaration    contained NT
+syntax keyword formMixedStatement contained P
+syntax keyword formDeclaration    contained S
+syntax keyword formDeclaration    contained T
+syntax keyword formDeclaration    contained V
+
+syntax case ignore
 
 syntax keyword formFunction       abs_
 syntax keyword formFunction       bernoulli_
