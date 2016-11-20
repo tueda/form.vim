@@ -169,6 +169,7 @@ syntax keyword formSetupKeyword   contained threadscratchsize
 syntax keyword formSetupKeyword   contained threadsortfilesynch
 syntax keyword formSetupKeyword   contained totalsize
 syntax keyword formSetupKeyword   contained workspace
+syntax keyword formSetupKeyword   contained wtimestats
 
 syntax keyword formOutputControl  contained ab abracket antibracket abrackets antibrackets
 syntax keyword formExecutable     contained al also
