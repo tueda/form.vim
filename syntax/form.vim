@@ -51,6 +51,7 @@ syntax case ignore
 syntax keyword formPreProcCommand contained add
 syntax keyword formPreProcCommand contained addseparator
 syntax keyword formPreProcCommand contained append
+syntax keyword formPreProcCommand contained appendpath
 "syntax keyword formPreProcCommand contained assign
 syntax keyword formPreProcCommand contained break
 syntax keyword formPreProcCommand contained breakdo
@@ -86,6 +87,7 @@ syntax keyword formPreProcCommand contained opendictionary
 syntax keyword formPreProcCommand contained optimize
 syntax keyword formPreProcCommand contained pipe
 syntax keyword formPreProcCommand contained preout
+syntax keyword formPreProcCommand contained prependpath
 syntax keyword formPreProcCommand contained printtimes
 syntax keyword formPreProcCommand contained procedure
 syntax keyword formPreProcCommand contained procedureextension
