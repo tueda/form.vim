@@ -400,6 +400,7 @@ syntax keyword formFunction       nargs_
 syntax keyword formFunction       nterms_
 syntax keyword formFunction       numfactors_
 syntax keyword formFunction       pattern_
+syntax keyword formFunction       perm_
 syntax keyword formFunction       poly_
 syntax keyword formFunction       prime_
 syntax keyword formFunction       putfirst_
