@@ -10,6 +10,16 @@ elseif exists("b:current_syntax")
   finish
 endif
 
+if !exists("g:form_minlines")
+  let g:form_minlines = 20
+endif
+if !exists("g:form_makeunderscoreletter")
+  let g:form_makeunderscoreletter = 0
+endif
+if !exists("g:form_makeatletter")
+  let g:form_makeatletter = 0
+endif
+
 syntax case match
 
 syntax match   formStatementBegin /\(^\|;\)\s*\zs\ze[a-zA-Z_]/ nextgroup=formDeclaration,formSpecification,formDefinition,formExecutable,formConditional,formRepeat,formLabel,formTableBase,formOutputControl,formModuleControl,formMixedStatement
@@ -43,7 +53,19 @@ syntax keyword formNumber         pi_
 
 syntax match   formWildcard       /?/
 syntax match   formWildcard       /?!\?\([a-zA-Z][a-zA-Z0-9]*_\?\|\[[^]]\+\]\|{[^}]\+}\)\(\[[a-zA-Z][a-zA-Z0-9]*\]\)\?/
+if g:form_makeunderscoreletter
+  syntax match formWildcard       /?!\?\([a-zA-Z_][a-zA-Z_0-9]*\|\[[^]]\+\]\|{[^}]\+}\)\(\[[a-zA-Z_][a-zA-Z_0-9]*\]\)\?/
+endif
+if g:form_makeatletter
+  syntax match formWildcard       /?!\?\([a-zA-Z@][a-zA-Z@0-9]*_\?\|\[[^]]\+\]\|{[^}]\+}\)\(\[[a-zA-Z@][a-zA-Z@0-9]*\]\)\?/
+endif
 syntax match   formDollar         /\$[a-zA-Z][a-zA-Z0-9]*/
+if g:form_makeunderscoreletter
+  syntax match formDollar         /\$[a-zA-Z_][a-zA-Z_0-9]*/
+endif
+if g:form_makeatletter
+  syntax match formDollar         /\$[a-zA-Z@][a-zA-Z@0-9]*/
+endif
 syntax match   formDollar         /\$\ze`/
 
 syntax case ignore
@@ -473,10 +495,7 @@ syntax keyword formIfFunction     contained findloop
 syntax keyword formIfFunction     contained multipleof
 syntax keyword formIfFunction     contained coefficient
 
-if !exists("form_minlines")
-  let form_minlines = 20
-endif
-exec "syntax sync minlines=" . form_minlines
+exec "syntax sync minlines=" . g:form_minlines
 
 if version >= 508 || !exists("did_form_syn_inits")
   if version < 508
