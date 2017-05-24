@@ -421,6 +421,7 @@ syntax keyword formFunction       mod2_
 syntax keyword formFunction       nargs_
 syntax keyword formFunction       nterms_
 syntax keyword formFunction       numfactors_
+syntax keyword formFunction       partitions_
 syntax keyword formFunction       pattern_
 syntax keyword formFunction       perm_
 syntax keyword formFunction       poly_
