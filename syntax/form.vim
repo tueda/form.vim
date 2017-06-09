@@ -418,6 +418,7 @@ syntax keyword formFunction       min_
 syntax keyword formFunction       minpowerof_
 syntax keyword formFunction       mod_
 syntax keyword formFunction       mod2_
+syntax keyword formFunction       mul_
 syntax keyword formFunction       nargs_
 syntax keyword formFunction       nterms_
 syntax keyword formFunction       numfactors_
