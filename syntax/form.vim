@@ -38,13 +38,13 @@ syntax region  formSetupBody      contained start=// end=/$/
 syntax match   formPreProc        /^\s*\#[\+\-]/
 syntax match   formPreProc        /^\s*\#\s*\ze\$/
 
-syntax match   formComment        /^\*.*$/ contains=formTodo
-syntax match   formComment        /;\zs\s*\*.*$/ contains=formTodo
+syntax match   formComment        /^\*.*$/ contains=formTodo,@Spell
+syntax match   formComment        /;\zs\s*\*.*$/ contains=formTodo,@Spell
 syntax keyword formToDo           contained TODO FIXME XXX
 
 syntax match   formDirective      /^\s*\.\(sort\|end\|store\|global\|clear\)\>/
 
-syntax region  formString         start=/"/ skip=/\\"/ end=/"/
+syntax region  formString         start=/"/ skip=/\\"/ end=/"/ contains=@Spell
 syntax region  formNestedString   start=/`/ end=/'/ contains=formNestedString
 syntax match   formFormalName     /\[[^\]]\+\]/ contains=formNestedString
 syntax match   formNumber         /\<\d\+\>/
