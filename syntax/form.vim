@@ -147,6 +147,7 @@ syntax keyword formSetupKeyword   contained hidesize
 syntax keyword formSetupKeyword   contained incdir
 syntax keyword formSetupKeyword   contained indentspace
 syntax keyword formSetupKeyword   contained insidefirst
+syntax keyword formSetupKeyword   contained jumpratio
 syntax keyword formSetupKeyword   contained largepatches
 syntax keyword formSetupKeyword   contained largesize
 syntax keyword formSetupKeyword   contained maxnumbersize
@@ -206,6 +207,8 @@ syntax keyword formExecutable     contained argtoextrasymbol
 syntax keyword formExecutable     contained argument
 syntax keyword formDeclaration    contained auto autodeclare skipwhite nextgroup=formDeclaration
 syntax keyword formOutputControl  contained bracket brackets
+syntax keyword formConditional    contained break
+syntax keyword formConditional    contained case
 syntax keyword formDeclaration    contained cfunction cfunctions
 syntax keyword formExecutable     contained chainin
 syntax keyword formExecutable     contained chainout
@@ -222,6 +225,7 @@ syntax keyword formDeclaration    contained ctable
 syntax keyword formDeclaration    contained ctensor ctensors
 syntax keyword formExecutable     contained cyclesymmetrize
 syntax keyword formDeclaration    contained deallocatetable
+syntax keyword formConditional    contained default
 syntax keyword formSpecification  contained delete
 syntax keyword formExecutable     contained denominators
 syntax keyword formDeclaration    contained dimension
@@ -240,6 +244,7 @@ syntax keyword formConditional    contained endif
 syntax keyword formExecutable     contained endinexpression
 syntax keyword formExecutable     contained endinside
 syntax keyword formRepeat         contained endrepeat
+syntax keyword formConditional    contained endswitch
 syntax keyword formExecutable     contained endterm
 syntax keyword formRepeat         contained endwhile
 syntax keyword formExecutable     contained exit
@@ -330,6 +335,7 @@ syntax keyword formExecutable     contained splitfirstarg
 syntax keyword formExecutable     contained splitlastarg
 syntax keyword formExecutable     contained stuffle
 syntax keyword formExecutable     contained sum
+syntax keyword formConditional    contained switch
 syntax keyword formDeclaration    contained symbol symbols
 syntax keyword formExecutable     contained symmetrize
 syntax keyword formDeclaration    contained table
