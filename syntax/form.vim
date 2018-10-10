@@ -128,6 +128,7 @@ syntax keyword formPreProcCommand contained skipextrasymbols
 syntax keyword formPreProcCommand contained switch
 syntax keyword formPreProcCommand contained system
 syntax keyword formPreProcCommand contained terminate
+syntax keyword formPreProcCommand contained timeoutafter
 syntax keyword formPreProcCommand contained toexternal
 syntax keyword formPreProcCommand contained undefine
 syntax keyword formPreProcCommand contained usedictionary
@@ -443,6 +444,7 @@ syntax keyword formFunction       root_
 syntax keyword formFunction       setfun_
 syntax keyword formFunction       sig_
 syntax keyword formFunction       sign_
+syntax keyword formFunction       sizeof_
 syntax keyword formFunction       sum_
 syntax keyword formFunction       sump_
 syntax keyword formFunction       table_
@@ -452,6 +454,7 @@ syntax keyword formFunction       termsin_
 syntax keyword formFunction       termsinbracket_
 syntax keyword formFunction       theta_
 syntax keyword formFunction       thetap_
+syntax keyword formFunction       topologies_
 
 syntax keyword formFunction       sqrt_
 syntax keyword formFunction       ln_
