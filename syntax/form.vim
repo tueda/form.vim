@@ -244,6 +244,7 @@ syntax keyword formRepeat         contained enddo
 syntax keyword formConditional    contained endif
 syntax keyword formExecutable     contained endinexpression
 syntax keyword formExecutable     contained endinside
+syntax keyword formDeclaration    contained endmodel
 syntax keyword formRepeat         contained endrepeat
 syntax keyword formConditional    contained endswitch
 syntax keyword formExecutable     contained endterm
@@ -286,6 +287,7 @@ syntax keyword formExecutable     contained makeinteger
 syntax keyword formExecutable     contained many
 syntax keyword formExecutable     contained merge
 syntax keyword formDeclaration    contained metric
+syntax keyword formDeclaration    contained model
 syntax keyword formModuleControl  contained moduleoption
 syntax keyword formDeclaration    contained modulus
 syntax keyword formExecutable     contained multi
@@ -307,6 +309,7 @@ syntax keyword formDeclaration    contained off
 syntax keyword formDeclaration    contained on
 syntax keyword formExecutable     contained once
 syntax keyword formExecutable     contained only
+syntax keyword formDeclaration    contained particle
 syntax keyword formDeclaration    contained polyfun
 syntax keyword formDeclaration    contained polyratfun
 syntax keyword formSpecification  contained pophide
@@ -357,6 +360,7 @@ syntax keyword formOutputControl  contained unfactorize
 syntax keyword formSpecification  contained unhide
 syntax keyword formDeclaration    contained unittrace
 syntax keyword formDeclaration    contained vector vectors
+syntax keyword formDeclaration    contained vertex
 syntax keyword formRepeat         contained while skipwhite nextgroup=formIfCondition
 syntax keyword formDeclaration    contained write
 
